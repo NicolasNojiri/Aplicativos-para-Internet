@@ -28,4 +28,9 @@ class ProductService {
     public function alterar($id,$nome,$descricao){ 
         return $this->dao->alterar($id,$nome,$descricao); 
     }
+
+    public function excluir($id){
+        if(empty($id)) throw new \Exception("ID do produto é obrigatório");
+        return $this->dao->deletar($id);
+    }
 }

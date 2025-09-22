@@ -24,4 +24,9 @@ class UserService {
     public function listarId($id){ 
         return $this->dao->listarId($id); 
     }
+
+    public function excluir($id){
+        if(empty($id)) throw new \Exception("ID do usuário é obrigatório");
+        return $this->dao->deletar($id);
+    }
 }

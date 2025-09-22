@@ -10,6 +10,7 @@
         <td><?= htmlspecialchars($p['descricao']) ?></td>
         <td>
             <a href="?param=produto/formularioalterar&id=<?= $p['id'] ?>" class="btn" style="background: #28a745;">Editar</a>
+            <a href="?param=produto/excluir&id=<?= $p['id'] ?>" class="btn" style="background: #dc3545;" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</a>
         </td>
     </tr>
     <?php endforeach; ?>
