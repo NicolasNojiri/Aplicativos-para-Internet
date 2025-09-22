@@ -42,4 +42,24 @@ class Produto {
         $resultado = $service->listarId($id);
         $this->template->layout("/public/Produto/form.php", $resultado);
     }
+
+    public function excluir(){
+        try {
+            $id = $_GET['id'] ?? null;
+            if(empty($id)) {
+                throw new \Exception("ID do produto não fornecido");
+            }
+            
+            $service = new ProductService();
+            $service->excluir($id);
+            
+            header("location: ?param=produto/lista");
+            exit;
+        } catch(\Exception $e) {
+            echo "<div style='color: red; padding: 10px; background: #ffebee; border: 1px solid #f44336; margin: 10px; border-radius: 4px;'>";
+            echo "Erro ao excluir produto: " . $e->getMessage();
+            echo "</div>";
+            $this->listar();
+        }
+    }
 }

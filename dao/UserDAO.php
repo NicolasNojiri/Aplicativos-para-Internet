@@ -21,4 +21,10 @@ class UserDAO extends MysqlFactory {
         $param = [":id"=>$id];
         return $this->banco->executar($sql,$param);
     }
+
+    public function deletar($id){
+        $sql = "delete from usuarios where id=:id";
+        $param = [":id"=>$id];
+        return $this->banco->executar($sql,$param);
+    }
 }

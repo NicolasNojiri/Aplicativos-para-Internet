@@ -35,4 +35,24 @@ class User {
             $this->formulario();
         }
     }
+
+    public function excluir(){
+        try {
+            $id = $_GET['id'] ?? null;
+            if(empty($id)) {
+                throw new \Exception("ID do usuário não fornecido");
+            }
+            
+            $service = new UserService();
+            $service->excluir($id);
+            
+            header("location: ?param=usuario/lista");
+            exit;
+        } catch(\Exception $e) {
+            echo "<div style='color: red; padding: 10px; background: #ffebee; border: 1px solid #f44336; margin: 10px; border-radius: 4px;'>";
+            echo "Erro ao excluir usuário: " . $e->getMessage();
+            echo "</div>";
+            $this->listar();
+        }
+    }
 }
