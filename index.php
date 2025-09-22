@@ -48,12 +48,12 @@
             <p>Escolha uma das funcionalidades abaixo:</p>
             <ul>
                 
-                <li><a href="produto/lista">Listar Produtos</a></li>
-                <li><a href="produto/formulario">Cadastrar Produto</a></li>
-                <li><a href="usuario/lista">Listar Usuários</a></li>
-                <li><a href="usuario/formulario">Cadastrar Usuário</a></li>
-                <li><a href="feedback/lista">Listar Feedbacks</a></li>
-                <li><a href="feedback/formulario">Cadastrar Feedback</a></li>
+                <li><a href="?param=produto/lista">Listar Produtos</a></li>
+                <li><a href="?param=produto/formulario">Cadastrar Produto</a></li>
+                <li><a href="?param=usuario/lista">Listar Usuários</a></li>
+                <li><a href="?param=usuario/formulario">Cadastrar Usuário</a></li>
+                <li><a href="?param=feedback/lista">Listar Feedbacks</a></li>
+                <li><a href="?param=feedback/formulario">Cadastrar Feedback</a></li>
             </ul>
         </body>
         </html>

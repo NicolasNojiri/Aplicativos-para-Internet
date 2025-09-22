@@ -13,13 +13,13 @@ class Controller{
             "produto/formularioalterar" => new Acao("Produto","alterarForm"),
             "produto/inserir" => new Acao("Produto","inserir"),
             // Usuarios
-            "usuario/lista" => new Acao("Usuario","listar"),
-            "usuario/formulario" => new Acao("Usuario","formulario"),
-            "usuario/inserir" => new Acao("Usuario","inserir"),
+            "usuario/lista" => new Acao("User","listar"),
+            "usuario/formulario" => new Acao("User","formulario"),
+            "usuario/inserir" => new Acao("User","inserir"),
             // Feedback
             "feedback/lista" => new Acao("Feedback","listar"),
             "feedback/formulario" => new Acao("Feedback","formulario"),
-            "feedback/inserir" => new Acao("Feedback","inserir")
+            "feedback/inserir" => new Acao("Feedback","inserir"),
         ];
     }
 

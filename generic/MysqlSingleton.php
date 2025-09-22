@@ -4,14 +4,16 @@ namespace generic;
 class MysqlSingleton{
     private static $instance = null;
     private $conexao = null;
-    private $dsn = 'mysql:host=localhost;dbname=feedback_db;charset=utf8';
-    private $usuario = 'root';
-    private $senha = '';
 
     private function __construct(){
         try{
-            $this->conexao = new \PDO($this->dsn, $this->usuario, $this->senha);
+            $config = include __DIR__ . '/../config.php';
+            $db = $config['database'];
+            
+            $dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset={$db['charset']}";
+            $this->conexao = new \PDO($dsn, $db['username'], $db['password']);
             $this->conexao->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->conexao->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         } catch(\PDOException $e){
             echo "Erro ao conectar ao banco: " . $e->getMessage();
             exit;
