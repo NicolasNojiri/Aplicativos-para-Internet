@@ -1,5 +1,5 @@
 <?php
-namespace dao\mysql;
+namespace dao;
 
 use generic\MysqlFactory;
 

@@ -1,4 +1,16 @@
-RewriteEngine on
+Options +FollowSymLinks
+RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?param=$1 [L,QSA]
+RewriteRule ^(.*)$ index.php?param=$1 [QSA,L]
+
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "database.sql">
+    Order Allow,Deny  
+    Deny from all
+</Files>
