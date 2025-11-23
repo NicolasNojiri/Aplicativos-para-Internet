@@ -10,27 +10,64 @@ class ProductService {
     }
 
     public function listar(){ 
-        return $this->dao->listar(); 
+        try {
+            return $this->dao->listar();
+        } catch (\Exception $e) {
+            throw new \Exception("Erro ao listar produtos: " . $e->getMessage());
+        }
     }
 
-    public function inserir($nome,$descricao){
-        if(trim($nome) == '') throw new \Exception("Nome do produto é obrigatório");
+    public function inserir($nome, $descricao){
+        try {
+            if(trim($nome) == '') throw new \Exception("Nome do produto é obrigatório");
+            if(trim($descricao) == '') throw new \Exception("Descrição do produto é obrigatória");
+            if(strlen(trim($nome)) > 255) throw new \Exception("Nome do produto não pode ter mais de 255 caracteres");
 
-        if(trim($descricao) == '') throw new \Exception("Descrição do produto é obrigatória");
-
-        return $this->dao->inserir(trim($nome), trim($descricao));
+            return $this->dao->inserir(trim($nome), trim($descricao));
+        } catch (\Exception $e) {
+            throw new \Exception("Erro ao inserir produto: " . $e->getMessage());
+        }
     }
 
     public function listarId($id){ 
-        return $this->dao->listarId($id); 
+        try {
+            if(empty($id)) throw new \Exception("ID do produto é obrigatório");
+            return $this->dao->listarId($id);
+        } catch (\Exception $e) {
+            throw new \Exception("Erro ao buscar produto: " . $e->getMessage());
+        }
     }
 
-    public function alterar($id,$nome,$descricao){ 
-        return $this->dao->alterar($id,$nome,$descricao); 
+    public function alterar($id, $nome, $descricao){ 
+        try {
+            if(empty($id)) throw new \Exception("ID do produto é obrigatório");
+            if(trim($nome) == '') throw new \Exception("Nome do produto é obrigatório");
+            if(trim($descricao) == '') throw new \Exception("Descrição do produto é obrigatória");
+            if(strlen(trim($nome)) > 255) throw new \Exception("Nome do produto não pode ter mais de 255 caracteres");
+            
+            $produto = $this->dao->listarId($id);
+            if (!$produto || empty($produto)) {
+                throw new \Exception("Produto não encontrado");
+            }
+            
+            return $this->dao->alterar($id, trim($nome), trim($descricao));
+        } catch (\Exception $e) {
+            throw new \Exception("Erro ao alterar produto: " . $e->getMessage());
+        }
     }
 
     public function excluir($id){
-        if(empty($id)) throw new \Exception("ID do produto é obrigatório");
-        return $this->dao->deletar($id);
+        try {
+            if(empty($id)) throw new \Exception("ID do produto é obrigatório");
+            
+            $produto = $this->dao->listarId($id);
+            if (!$produto || empty($produto)) {
+                throw new \Exception("Produto não encontrado");
+            }
+            
+            return $this->dao->deletar($id);
+        } catch (\Exception $e) {
+            throw new \Exception("Erro ao excluir produto: " . $e->getMessage());
+        }
     }
 }

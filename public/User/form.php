@@ -9,5 +9,10 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required />
     </div>
+    <div class="form-group">
+        <label for="password">Senha (opcional para usuários existentes):</label>
+        <input type="password" id="password" name="password" placeholder="Deixe em branco se não quiser definir senha" />
+        <small style="color: #666;">Mínimo 6 caracteres se informado</small>
+    </div>
     <input type="submit" value="Salvar Usuário" class="btn" />
 </form>
