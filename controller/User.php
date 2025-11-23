@@ -11,9 +11,16 @@ class User {
     }
 
     public function listar(){
-        $service = new UserService();
-        $resultado = $service->listar();
-        $this->template->layout("/public/User/listar.php", $resultado);
+        try {
+            $service = new UserService();
+            $resultado = $service->listar();
+            $this->template->layout("/public/User/listar.php", $resultado);
+        } catch(\Exception $e) {
+            echo "<div style='color: red; padding: 10px; background: #ffebee; border: 1px solid #f44336; margin: 10px; border-radius: 4px;'>";
+            echo "Erro ao listar usuários: " . $e->getMessage();
+            echo "</div>";
+            $this->template->layout("/public/User/listar.php", []);
+        }
     }
 
     public function formulario(){
@@ -24,13 +31,15 @@ class User {
         try {
             $nome = $_POST['nome'] ?? '';
             $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? null;
+            
             $service = new UserService();
-            $service->inserir($nome,$email);
+            $service->inserir($nome, $email, $password);
             header("location: ?param=usuario/lista");
             exit;
         } catch(\Exception $e) {
             echo "<div style='color: red; padding: 10px; background: #ffebee; border: 1px solid #f44336; margin: 10px; border-radius: 4px;'>";
-            echo "Erro: " . $e->getMessage();
+            echo "Erro ao inserir usuário: " . $e->getMessage();
             echo "</div>";
             $this->formulario();
         }
